@@ -28,4 +28,4 @@ def about():
 
 @app.route('/blog')
 def blog():
-    return render_template('blog.html', posts=posts)
+    return render_template('blog.html', posts=posts, title='Blog')
