@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Animal Magic</title>
+    {% if title %}
+    <title> {{ title }} | Animal Magic</title>
+{% else %} 
+    <title>Home | Animal Magic</title>
+{% endif %}
 </head>
 <body>
     <h1>About Us</h1>
