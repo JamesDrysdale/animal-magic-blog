@@ -103,5 +103,5 @@ def new_post():
 
 @app.route("/post/<int:post_id>")
 def post(post_id):
-    post = post.query.get_or_404(post_id) #Gets post if it exists. If not returns a 404
+    post = Post.query.get_or_404(post_id) #Gets post if it exists. If not returns a 404
     return render_template('post.html', title=post.title, post=post)
