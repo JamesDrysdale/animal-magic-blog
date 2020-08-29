@@ -18,6 +18,7 @@ def about():
 
 @app.route('/blog')
 def blog():
+    posts = Post.query.all()
     return render_template('blog.html', posts=posts, title='Blog')
 
 @app.route("/register", methods=['GET', 'POST'])
