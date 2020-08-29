@@ -7,22 +7,6 @@ from animalmagicblog.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from animalmagicblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
-# Dummy Data for testing
-posts = [
-    {
-        'author': 'James Drysdale', 
-        'title': 'Feeding birds',
-        'content': 'Why you are probably feeding birds to death and how to feed them the right way.',
-        'date_posted': 'September 1st 2020'
-    },
-    {
-        'author': 'James Drysdale', 
-        'title': 'Dog Training 101: Recall',
-        'content': 'How to get your dog to return to you on your command.',
-        'date_posted': 'September 11th 2020'
-    }
-]
-
 @app.route('/')
 @app.route('/home')
 def home():
