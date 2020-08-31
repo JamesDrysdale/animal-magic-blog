@@ -1,5 +1,6 @@
 from datetime import datetime
-from animalmagicblog import db, login_manager
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from animalmagicblog import db, login_manager, app
 from flask_login import UserMixin
 
 @login_manager.user_loader
@@ -15,6 +16,20 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     # 1 to many relationship between user/author and posts
     posts = db.relationship('Post', backref='author', lazy=True)
+
+     # Get token to reset lost/forgotten details
+    def get_reset_token(self, expires_sec=1800): # 30mins exirey time
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id':self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
